@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Autofac;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -19,18 +20,19 @@ namespace AdapterWithDI
         }
     }
 
+
     public class OpenCommand:ICommand
     {
         public void Execute()
         {
-           Console.WriteLine("Openning a file"); 
+           Console.WriteLine("Opening a file"); 
         }
     }
 
     public class Button
     {
         private readonly ICommand _command;
-
+        
         public Button(ICommand command)
         {
             _command = command;
@@ -66,16 +68,17 @@ namespace AdapterWithDI
         static void Main(string[] args)
         {
             //setting up the DI
-            var serviceProvider = new ServiceCollection()
-                .AddTransient<ICommand, OpenCommand>()
-                .AddTransient<ICommand, SaveCommand>()
-                .AddTransient(typeof(Button))
-                .AddTransient<ICommand,Button>(cmd=>new Button(cmd))
-                .AddTransient(typeof(Editor))
-                .BuildServiceProvider();
-            
-            var editorService = serviceProvider.GetService<Editor>();
-            editorService.ClickAll();
+            var b = new ContainerBuilder();
+            b.RegisterType<SaveCommand>().As<ICommand>();
+            b.RegisterType<OpenCommand>().As<ICommand>();
+            //b.RegisterType<Button>();
+            b.RegisterAdapter<ICommand, Button>(cmd => new Button(cmd));
+            b.RegisterType<Editor>();
+            using (var c = b.Build())
+            {
+                var editor = c.Resolve<Editor>();
+                editor.ClickAll();
+            }
         }
     }
 }

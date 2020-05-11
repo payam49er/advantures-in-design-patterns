@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BridgePractice", "BridgePractice\BridgePractice.csproj", "{2E703BE3-0A3D-408F-BAF6-F51BE7B55AF3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2E703BE3-0A3D-408F-BAF6-F51BE7B55AF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E703BE3-0A3D-408F-BAF6-F51BE7B55AF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E703BE3-0A3D-408F-BAF6-F51BE7B55AF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E703BE3-0A3D-408F-BAF6-F51BE7B55AF3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7FDD8698-7EE1-4E84-9A58-F73CB9967B4A}
+	EndGlobalSection
+EndGlobal
