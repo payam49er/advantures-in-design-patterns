@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
+using Autofac;
 
 namespace Decorator
 {
@@ -37,14 +38,27 @@ namespace Decorator
             //if(anotherDragon is IAnotherLizard lizard)
             //    lizard.Crawl();
 
-            var square = new Square(5.6f);
-            Console.WriteLine(square.AsString());
+            //var square = new Square(5.6f);
+            //Console.WriteLine(square.AsString());
 
-            var redSquare = new ColoredShape(square,"red");
-            Console.WriteLine(redSquare.AsString());
+            //var redSquare = new ColoredShape(square,"red");
+            //Console.WriteLine(redSquare.AsString());
 
-            var transparentSquare = new TransparentShape(redSquare,0.5f);
-            Console.WriteLine(transparentSquare.AsString());
+            //var transparentSquare = new TransparentShape(redSquare,0.5f);
+            //Console.WriteLine(transparentSquare.AsString());
+
+
+            var cbBuilder = new ContainerBuilder();
+            cbBuilder.RegisterType<ReportingService>().Named<IReporting>("reporting");
+            cbBuilder.RegisterDecorator<IReporting>((context,service)=>new ReposrtingServiceWithLogging(service),"reporting"); //how to register decorater with AutoFac
+            using (var c = cbBuilder.Build())
+            {
+                var r = c.Resolve<IReporting>();
+                r.Report();
+            }
         }
+
+
+
     }
 }

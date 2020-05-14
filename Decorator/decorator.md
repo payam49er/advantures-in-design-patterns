@@ -28,4 +28,7 @@ have to go into the class and make some changes! You also need to do the casting
 this is demonstrated in shape. We add decorator on top of decorator and this works well at the runtime as well. 
 
 #Static Decorator
-C# is not a great language for doing this. C++ is better for doing this. Because it can inherit from template argument. recurring template pattern in C++
+C# is not a great language for doing this. C++ is better for doing this. Because it can inherit from template argument.
+recurring template pattern in C++
+we can't do the following in C# (this is doable in C++)
+public class ColoredShape<T> : T /CRTP pattern
