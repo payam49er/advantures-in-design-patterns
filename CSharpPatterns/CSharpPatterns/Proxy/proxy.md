@@ -14,3 +14,25 @@ using a property.
 #Value Proxy
 It is a proxy that is created over a primitive type. Why? imagine you have an int or float, and you want to have stronger typing. 
 A wrapper around a primitive value that controls certain operations around a value type. 
+
+#Composite Proxy
+There is a combination of proxy and composite pattern. This is a composite proxy, which allows us to create a pattern which we can work with large 
+volumes of data. This pattern is used very often in game design. Modern CPUs like to have the data that they need to process next to each other. 
+The modern CPU likes to have predictable data, and this has more to do with the internal instructions and the architecture of moden CPUs.
+
+
+#Dynamic Proxy
+Sometimes you want to construct a proxy at the runtime even with all the associated computation cost. One of the ways to achive this is by using
+
+impromptu-interface (https://github.com/ekonbenefits/impromptu-interface)
+Overall, when we have a dynamic object, we don't know its properties or functionality. Using Dyanimc proxy, we can implement such properties or
+functionality for a dynamic object. 
+
+#Proxy vs Decorator
+
+Proxy provides an identical interface; decorator provides an enhanced interface. Decorator may replicate some or all of the interfce of an object, but 
+decorator adds other functionality too
+
+Decorator typically aggerages or has reference to what it is decorating. proxy doesn't have to
+
+Proxy might not even be working with a metrialized object. Thik of it as the Lazy over an entire object. 

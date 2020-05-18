@@ -63,4 +63,39 @@ namespace XTestPatterns
         }
     }
 
+
+    [TestFixture]
+    public class CompositeProxy
+    {
+
+        [Test]
+        public void TestCompositeProxyPattern()
+        {
+            var creatures = new GameCreature[100];
+            foreach (GameCreature gameCreature in creatures)
+            {
+                gameCreature.X++;
+            }
+
+        }
+    }
+
+    [TestFixture]
+    public class DynamicProxyPatternTest
+    {
+        [Test]
+        public void TestDyanmicProxyPattern()
+        {
+            var ba = Log<BankAccount>.As<IBankAccount>();
+
+            ba.Deposit(100);
+            ba.Withdraw(50);
+
+            Console.WriteLine(ba);
+            Console.WriteLine(ba);
+
+        }
+    }
+    
+
 }
