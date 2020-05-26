@@ -58,5 +58,15 @@ namespace XTestPatterns
             Console.WriteLine(goblin);
         }
 
+        [Test]
+        public void ChailChallengeTest()
+        {
+            var challengeGame = new ChallengeGame();
+            var goblin = new Goblin(challengeGame);
+            challengeGame.Creatures.Add(goblin);
+            Assert.That(goblin.Attack,Is.EqualTo(1));
+            Assert.That(goblin.Defense,Is.EqualTo(1));
+        }
+
     }
 }
