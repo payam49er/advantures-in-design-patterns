@@ -75,5 +75,33 @@ namespace XTestPatterns
             Console.WriteLine(to);
 
         }
+
+        [Test]
+
+        public void TestCommandChallenge()
+        {
+            var cm = new CommandChallenge();
+
+            cm.Amount = 100;
+            cm.TheAction = CommandChallenge.Action.Deposit;
+            cm.Success = true;
+
+            var cm2 = new CommandChallenge();
+            cm2.Amount = 100;
+            cm2.TheAction = CommandChallenge.Action.Withdraw;
+
+
+
+            var acc = new Account();
+
+            acc.Process(cm);
+            Console.WriteLine(acc.Balance);
+
+
+            acc.Process(cm2);
+
+            Console.WriteLine(acc.Balance);
+        }
     }
 }
+
