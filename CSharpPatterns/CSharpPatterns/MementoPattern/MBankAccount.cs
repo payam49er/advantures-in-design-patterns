@@ -30,6 +30,7 @@ namespace CSharpPatterns.MementoPattern
             _changes.Add(new Memento(_balance));
         }
 
+        //the heart of the memento pattern
         public Memento Deposit(int amount)
         {
             _balance += amount;
