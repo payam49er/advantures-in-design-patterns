@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Reflection.Emit;
-using System.Text;
 
 namespace CSharpPatterns.ObserverPattern
 {
 
-    public class FallsIllEventsArgs
+    public class FallsIllEventsArgs:EventArgs
     {
         public string Address;
     }

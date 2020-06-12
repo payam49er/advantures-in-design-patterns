@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.InteropServices;
 using System.Text;
 using CSharpPatterns.ObserverPattern;
 using NUnit.Framework;
@@ -73,11 +75,77 @@ namespace XTestPatterns
             specialPerson.FallIll();
         }
 
+        [Test]
+        public void TestingBindingList()
+        {
+            var markets = new Market();
+            markets.Prices.ListChanged += (sender, eventargs) =>
+            {
+                if (eventargs.ListChangedType == ListChangedType.ItemAdded)
+                {
+                    float price = ((BindingList<float>) sender)[eventargs.NewIndex];
+                    Console.WriteLine($"Binding list got a price of {price}");
+                }
+            };
+        }
 
 
+        [Test]
+        public void TestPropertyChange()
+        {
+            var product = new Product {Name = "Book"};
+            var biWindow = new BiWindow {ProductName = "Book"};
+
+            product.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == "Name")
+                {
+                    Console.WriteLine("Name changed in product");
+                    biWindow.ProductName = product.Name;
+                    Console.WriteLine($"BiWindow product name changed: {biWindow.ProductName}");
+                }
+            };
+
+            biWindow.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == "ProductName")
+                {
+                    Console.WriteLine("BiWindow property name changed");
+                    product.Name = biWindow.ProductName;
+                    Console.WriteLine($"Product Name {product.Name}");
+                }
+            };
+
+
+            product.Name = "Smart Book";
+
+            biWindow.ProductName = "Fiction Book";
+        }
+
+        [Test]
+        public void TestPropertyChangeBidirectional()
+        {
+            var product = new Product { Name = "Book" };
+            var biWindow = new BiWindow { ProductName = "Book" };
+
+            using (var binding = new BirectionalBinding(
+                    product,
+                    ()=>product.Name,
+                    biWindow,
+                    () => biWindow.ProductName
+            ))
+            {
+                Console.WriteLine("Name changed in product");
+                product.Name = "Smart Book";
+                Console.WriteLine($"BiWindow product name changed: {biWindow.ProductName}");
+                Console.WriteLine($"Product Name {product.Name}");
+
+                Console.WriteLine("BiWindow property name changed");
+                biWindow.ProductName = "Fiction Book";
+                Console.WriteLine($"Product Name {product.Name}");
+
+                Console.WriteLine($"BiWindow product name changed: {biWindow.ProductName}");
+            }
+        }
     }
-
-
-
-
 }

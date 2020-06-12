@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using CSharpPatterns.Annotations;
 
 namespace CSharpPatterns.ObserverPattern
 {
@@ -75,4 +77,46 @@ namespace CSharpPatterns.ObserverPattern
                 Console.WriteLine($"A doctor is required at {args.Address}");
         }
     }
+
+    /// <summary>
+    /// implementing a single property notification on change
+    /// </summary>
+    public class SinglePropertyMarket:INotifyPropertyChanged
+    {
+        private float volatility;
+
+        public float Volatility
+        {
+            get => volatility;
+            set
+            {
+                if(value.Equals(volatility)) return;
+                volatility = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+
+    public class Market
+    {
+       // private List<float> prices = new List<float>();
+       public BindingList<float> Prices = new BindingList<float>(); // a list that does the notification automatically
+
+        public void AddPrice(float price)
+        {
+            Prices.Add(price);
+        }
+
+
+    }
+
 }
