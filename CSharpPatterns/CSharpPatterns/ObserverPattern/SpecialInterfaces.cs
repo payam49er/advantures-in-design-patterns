@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using CSharpPatterns.Annotations;
+using JetBrains.Annotations;
+
 
 namespace CSharpPatterns.ObserverPattern
 {

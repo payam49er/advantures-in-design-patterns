@@ -1,9 +1,10 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using CSharpPatterns.Annotations;
+//using CSharpPatterns.Annotations;
 
 namespace CSharpPatterns.ObserverPattern
 {

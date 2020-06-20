@@ -6,6 +6,7 @@ using CSharpPatterns.StatePattern;
 using CSharpPatterns.TemplateMethod;
 using Dynamitey.DynamicObjects;
 using NUnit.Framework;
+using Stateless;
 using Action = CSharpPatterns.StatePattern.Action;
 using static CSharpPatterns.StatePattern.StatePatternSwitchExpression;
 
@@ -73,5 +74,22 @@ namespace XTestPatterns
             chest = Manipulate(chest, Action.Close, false);
             Console.WriteLine($"Chest is {chest}");
         }
+
+        [Test]
+        public void StateLessTest()
+        {
+            var stateMachine = new StateMachine<Health, Activity>(Health.NonReproductive);
+            stateMachine.Configure(Health.NonReproductive)
+                .Permit(Activity.ReachPuberty, Health.Reproductive);
+            stateMachine.Configure(Health.Reproductive)
+                .Permit(Activity.Historectomy, Health.NonReproductive)
+                .PermitIf(Activity.HaveUnprotectedSex, Health.Pregnant,
+                    () => ParentsNotWatching);
+            stateMachine.Configure(Health.Pregnant)
+                .Permit(Activity.GiveBirth, Health.Reproductive)
+                .Permit(Activity.HaveAbortion, Health.Reproductive);
+        }
+
+        public bool ParentsNotWatching { get; set; }
     }
 }
